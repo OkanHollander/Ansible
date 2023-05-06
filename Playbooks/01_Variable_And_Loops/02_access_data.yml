@@ -1,0 +1,12 @@
+---
+
+- name: "ACCESS DATA"
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I - GATHER DATA"
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }} has ospf rid:{{ hostvars[ansible_host]['ospf']['rid'] }}"
+      when: hostvars[ansible_host]['ospf']['rid'] is defined
