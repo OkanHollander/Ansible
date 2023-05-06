@@ -1,0 +1,12 @@
+---
+
+- name: "Printing Variables"
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: TASK I - Gather Info
+      ansible.builtin.debug:
+        msg: "{{ hostvars[ansible_host] }}"
+      register: output
