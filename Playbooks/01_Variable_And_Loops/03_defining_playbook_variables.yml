@@ -1,0 +1,13 @@
+---
+
+- name: "USING VARIABLES"
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+  vars:
+    http_port: 80
+
+  tasks:
+    - name: TASK I
+      ansible.builtin.debug:
+        msg: "the port used in http is {{ http_port }}"
