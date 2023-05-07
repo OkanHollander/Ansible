@@ -1,0 +1,20 @@
+---
+
+# make sure you have 'netaddr' installed
+# pip3 install netaddr
+
+- name: "IP ADDRESS FILTERING"
+  hosts: localhost
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I"
+      vars:
+        myip:
+          - "192.168.55.149"
+          - "5.5.5.5"
+      ansible.builtin.debug:
+        msg: "{{ item | ansible.utils.ipaddr }} is a valid ip address"
+      loop: "{{ myip }}"
+      when: item | ansible.utils.ipaddr is not false
