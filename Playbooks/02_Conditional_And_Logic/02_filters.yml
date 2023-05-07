@@ -1,0 +1,23 @@
+---
+
+- name: PLAYBOOK WITH FILTERS
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I "
+      vars:
+        my_list1:
+          - 5
+          - 10
+          - 4
+          - 44
+          - 21
+        my_list2:
+          - 5
+          - 4
+          - 33
+          - 91
+      ansible.builtin.debug:
+        msg: "{{ my_list1 | symmetric_difference(my_list2) }}"
