@@ -1,0 +1,16 @@
+---
+
+- name: JINJA2 LOOPS
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: TASK I - CONFIGURE BGP
+      cisco.ios.config:
+        src: "bgp-configs/03_03_bgp.j2"
+      register: output
+
+    - name: TASK II - PRINT OUTPUT
+      ansible.builtin.debug:
+        msg: "{{ output }}"
