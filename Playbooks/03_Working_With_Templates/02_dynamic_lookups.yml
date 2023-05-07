@@ -1,0 +1,16 @@
+---
+
+- name: PLAYBOOK WITH DYNAMIC LOOKUPS
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: TASK I - CONFIGURE EIGRP
+      cisco.ios.config:
+        src: "eigrp-configs/{{ eigrp.style }}.j2"
+      register: output
+
+    - name: TASK II - PRINT OUTPUT
+      ansible.builtin.debug:
+        msg: "{{ output }}"
