@@ -1,0 +1,11 @@
+---
+
+- name: PLAYBOOK WITH VARIABLE SUBSTITUTION
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I"
+      cisco.ios.config:
+        src: "bgp-configs/03_01_bgp.j2"
