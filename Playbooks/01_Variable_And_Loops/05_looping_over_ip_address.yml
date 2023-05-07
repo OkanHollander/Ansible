@@ -1,0 +1,21 @@
+---
+
+- name: LOOP OVER IP ADDRESS
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: TASK I - GATHER FACTS
+      cisco.ios.ios_facts:
+        gather_network_resources:
+          - 'interfaces'
+        gather_subset:
+          - 'all'
+      register: output
+
+    - name: TASK II - PRINT OUTPUT
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }}'s {{ item.key }} ip address is {{ item.value.ipv4[0].address }}"
+      loop: "{{ output['ansible_facts']['ansible_net_interfaces'] | dict2items }}"
+      when: item.value.ipv4 | length > 0
