@@ -1,0 +1,21 @@
+---
+
+- name: CONDITIONAL PLAYBOOK
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I - GATHER FACTS"
+      cisco.ios.facts:
+        gather_subset:
+          - 'all'
+        gather_network_resources:
+          - 'interfaces'
+      register: output
+
+    - name: "TASK II - PRINT OUTPUT"
+      ansible.builtin.debug:
+        msg: "{{ item.key }} has ip address {{ item.value.ipv4[0].address }}"
+      loop: "{{ output['ansible_facts']['ansible_net_interfaces'] | dict2items }}"
+      when: item.value.ipv4 | length > 0
