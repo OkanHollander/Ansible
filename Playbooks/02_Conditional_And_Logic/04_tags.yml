@@ -1,0 +1,31 @@
+---
+
+- name: PLAYBOOK WITH TAGS
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I - CREATE USER"
+      cisco.ios.config:
+        lines:
+          - no username ansible_user priv 15 secret cisco1234
+      register: user_output
+      tags: user_config
+
+    - name: "TASK II - USER OUTPUT"
+      ansible.builtin.debug:
+        msg: "{{ user_output }}"
+      tags: user_config
+
+    - name: "TASK III - NTP CONFIG"
+      cisco.ios.config:
+        lines:
+          - ntp server 1.2.3.4
+      register: ntp_output
+      tags: ntp_config
+
+    - name: "TASK IV - NTP OUTPUT"
+      ansible.builtin.debug:
+        msg: "{{ ntp_output }}"
+      tags: ntp_config
