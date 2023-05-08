@@ -1,0 +1,28 @@
+
+-----Encrypt New File-----
+1.  ansible-vault encrypt <file name>
+2.  <enter vault password>
+3.  <confirm vault password>
+
+-----View Encypted File-----
+1.  ansible-vault view <file name>
+2.  <vault password>
+
+-----Edit Encrypted File-----
+1.  ansible-vault edit <file name>
+2.  <vault password>
+3.  works like vim...
+
+-----Create Encrypted File-----
+1.  ansible-vault create <file name>
+2.  <enter vault password>
+3.  <confirm vault password>
+4.  works like vim...
+
+-----Run Playbook-----
+Option 1 - Enter password through the cli
+1.  ansible-playbook <playbook> --ask-vault-password
+2.  <vault password>
+
+Option 2 - link password in ansible.cfg
+1.  vault_password_file = <location vault password>
