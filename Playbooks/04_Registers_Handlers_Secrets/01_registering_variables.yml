@@ -1,0 +1,16 @@
+---
+
+- name: REGISTERING VARIABLES
+  hosts: company1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK I"
+      cisco.ios.config:
+        src: "ntp-configs/04_01_ntp.j2"
+      register: output
+
+    - name: "TASK II - PRINT OUTPUT"
+      ansible.builtin.debug:
+        msg: "{{ output }}"
